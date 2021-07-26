@@ -5,31 +5,32 @@
 
 		<template id="journal_entry_template_report_view">
 			<t t-call="web.external_layout">
-                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-                <div class="page">
-                    <br/><br/>
-                    <div class="oe_structure"/>
-                        <div>
-                            <h3 class="text-center mb32">
+                <t t-set="o" t-value="o.with_context({'lang':'en_US'})"/>
+                <div class="page"  >
+             <div>
+             <h3 class="text-center mb32"  >
                                 <strong>Journal Entry</strong>
                             </h3>
                         </div>
-                    <br/>
 
                 <div class="row" id="journal_information">
-                    <div class="col-8">
-                        <div>
-                            <strong>Journal Entry :</strong>
-                            <p t-field="o.name"/>
+                        <div class="col-4">
+
+                   <div class="text-left  ">
+                    <strong>Date :</strong>
+                   <p t-field="o.date"/>
+                    </div>
+
+                        <div  >
+                            <strong>Created By:</strong>
+                               <p t-field="o.create_uid"/>
                         </div>
 
-                        <div class="text-left">
-                            <strong>Date :</strong>
-                            <p t-field="o.date"/>
                         </div>
-                    </div>  
+
+
                
-                    <div class="col-8">
+                    <div class="col-4">
                         <div>
                             <strong>Journal :</strong>
                             <p t-field="o.journal_id"/>
@@ -38,76 +39,113 @@
                             <strong>Reference :</strong>
                             <p t-field="o.ref"/>
                         </div>
-                    </div>  
-                </div>
-               
+                    </div>
 
-               <br/><br/>
-                <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                     <div class="col-4">
+                      <div  >
+                            <strong>Journal No:</strong>
+                               <p t-field="o.name"/>
+                        </div>
+
+                    </div>
+                </div>
+<br/><br/>
+                <table style="border-collapse: collapse;width: 100%;  " class="table table-sm">
                     <thead>
-                        <tr>
-                            <th>Partner</th>
-                            <th>Account</th>
-                            <th>Label</th>
-                            <th>Due Date</th>
-                            <th>Analytic Account</th>
-                            <th>Taxes(%)</th>
-                            <th>Debit</th>
+                        <tr style="white-space: nowrap;background-color: #f2f2f2;  " class="text-center">
+                            <th >Branch</th>
+                            <th  >Activities</th>
+                            <th  >Acc. No</th>
+                            <th  >Acc. Name</th>
+                             <th>Debit</th>
                             <th>Credit</th>
+                            <th>Description</th>
                         </tr>
                     </thead>  
-                    <tbody class="consumed_tbody">
+                    <tbody >
                         <t t-set="total" t-value="0.0"/>
                         <t t-set="total1" t-value="0.0"/>
                         <t t-foreach="o.line_ids" t-as="line">    
-                        <tr>
-                            <td>
-                                <span t-field="line.partner_id" />
+                        <tr  >
+                            <td >
+                                <span t-field="line.branch_id" />
                             </td>
-                            <td>
-                                <span t-field="line.account_id" />
-                            </td>
-                            <td>
-                                <span t-field="line.name" />
-                            </td>
-                            <td>
-                                <span t-field="line.date_maturity" />
-                            </td>
-                            <td>
+                              <td  >
                                 <span t-field="line.analytic_account_id" />
                             </td>
-                            <td>
-                                <span t-field="line.tax_ids" />
+                            <td style="white-space: nowrap;">
+                                <span t-field="line.account_id.code" />
+                            </td >
+                          <td style="white-space: nowrap;">
+                                <span t-field="line.account_id.name" />
                             </td>
-                            <td>
+
+
+                            <td style="white-space: nowrap;">
                                 <span t-field="line.debit" />
-                            </td>
-                            <td>
+                            </td >
+                            <td style="white-space: nowrap;">
                                 <span t-field="line.credit" />
+                            </td>
+                              <td >
+                                <span t-field="line.name" />
                             </td>
                         </tr>
                         <t t-set="total" t-value="total + line.debit"/>
                         <t t-set="total1" t-value="total1 + line.credit"/>
                         </t>
-                        <tr>
+                        <tr >
+
+
+                        <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total:</strong></td>
-                            <td width="10%"><strong>
+                            <td ><strong>Total:</strong></td>
+                            <td width="10%" style="border-top: 1px solid black;  white-space: nowrap;" ><strong>
                                 <span><t t-esc="total"/></span>
                             </strong></td>
-                             <td width="10%"><strong>
+                             <td width="10%" style="border-top: 1px solid black;  white-space: nowrap;"><strong>
                                 <span><t t-esc="total1"/></span>
                             </strong></td>
+                            <td></td>
                       </tr>
                     </tbody>
                 </table>
+
+
+               <br/><br/>
               
-                
-               
+                                <div class="row" id="signuture_information">
+                        <div class="col-4">
+
+                   <div class="text-left  ">
+                    <strong>Accountant</strong>
+
+                    </div>
+                        </div>
+
+
+     <div class="col-4">
+
+                   <div class="text-left  ">
+                    <strong>Accountant Manager</strong>
+
+                    </div>
+                        </div>
+
+       <div class="col-4">
+
+                   <div class="text-left  ">
+                    <strong>Audit</strong>
+
+                    </div>
+        </div>
+
+
+
+                </div>
+
+
                 </div>
             </t>
 		</template>
