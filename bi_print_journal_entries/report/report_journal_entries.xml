@@ -10,7 +10,12 @@
 				name="bi_print_journal_entries.journal_entry_report_template_id"/>
 
 
-
+	<report id="journal_entry_report_id_ar"
+				string="Print Journal Entries"
+				model="account.move"
+				report_type="qweb-pdf"
+				file="bi_print_journal_entries.journal_entry_report_template_id_ar"
+				name="bi_print_journal_entries.journal_entry_report_template_id_ar"/>
 
 		  <record id="inherit_view_account_move_form_Button" model="ir.ui.view">
             <field name="name">account.move.button.print.form</field>
